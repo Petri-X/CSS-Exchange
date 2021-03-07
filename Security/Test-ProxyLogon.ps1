@@ -19,7 +19,9 @@ param (
     $ComputerName = $env:COMPUTERNAME,
 
     [string]
-    $OutPath
+    $OutPath,
+    
+    $PSSOptions
 )
 
 process {
@@ -184,9 +186,9 @@ process {
         }
         process {
             if ($null -ne $ComputerName) {
-                Invoke-Command @parameters -ComputerName $ComputerName
+                Invoke-Command @parameters -ComputerName $ComputerName  -SessionOption  $PSSOptions
             } else {
-                Invoke-Command @parameters
+                Invoke-Command @parameters  -SessionOption $PSSOptions
             }
         }
     }
